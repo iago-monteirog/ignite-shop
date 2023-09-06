@@ -36,3 +36,7 @@ export const ImageContainer = styled('div', {
 export const ProductInfos = styled('div', {
 
 });
+
+export const PurchaseSummaryContainer = styled('div', {
+
+});

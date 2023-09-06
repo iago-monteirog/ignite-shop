@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Header>
 
         <ShopBag isOpen={isOpen} onToggleShopBag={handleToggleShopBag} />
+
         <Component {...pageProps} />
       </Container>
     </main>

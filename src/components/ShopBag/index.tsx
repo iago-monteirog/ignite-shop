@@ -1,5 +1,5 @@
 import { X } from "@phosphor-icons/react";
-import { ImageContainer, Product, ProductInfos, ProductsList, ShopBagContainer, ShopBagContent, ShopBagHeader } from "../../styles/components/shopbag";
+import { ImageContainer, Product, ProductInfos, ProductsList, PurchaseSummaryContainer, ShopBagContainer, ShopBagContent, ShopBagHeader } from "../../styles/components/shopbag";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -38,6 +38,16 @@ export function ShopBag({ isOpen = false, onToggleShopBag }: ShopBagProps) {
                     </Product>
                 </ProductsList>
             </ShopBagContent>
+
+            <PurchaseSummaryContainer>
+                <span>Quantidade</span>
+                <strong>Valor total</strong>
+
+                <span>3 itens</span>
+                <strong>R$ 270,00</strong>
+
+                <button>Finalizar compra</button>
+            </PurchaseSummaryContainer>
         </ShopBagContainer>
     )
 }
