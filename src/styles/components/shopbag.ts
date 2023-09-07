@@ -96,7 +96,7 @@ export const ProductInfos = styled('div', {
 export const PurchaseSummaryContainer = styled('div', {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 64,
+    marginTop: 96,
 
     button: {
         marginTop: 57,
