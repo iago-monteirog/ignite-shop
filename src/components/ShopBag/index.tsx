@@ -1,7 +1,8 @@
 import { X } from "@phosphor-icons/react";
-import { ImageContainer, Product, ProductInfos, ProductsList, PurchaseSummaryContainer, ShopBagContainer, ShopBagContent, ShopBagHeader } from "../../styles/components/shopbag";
+import { ImageContainer, Product, ProductInfos, ProductsList, PurchaseSummaryContainer, Quantity, ShopBagContainer, ShopBagContent, ShopBagHeader, Total } from "../../styles/components/shopbag";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import camiseta from '../../assets/1.png';
 
 interface ShopBagProps {
     isOpen: boolean,
@@ -26,7 +27,33 @@ export function ShopBag({ isOpen = false, onToggleShopBag }: ShopBagProps) {
                 <ProductsList>
                     <Product>
                         <ImageContainer>
+                            <Image src={camiseta} alt="" width={94} height={94} />
+                        </ImageContainer>
 
+                        <ProductInfos>
+                            <span>Camiseta Beyond the Limits</span>
+                            <strong>R$ 79,90</strong>
+
+                            <Link href="">Remover</Link>
+                        </ProductInfos>
+                    </Product>
+
+                    <Product>
+                        <ImageContainer>
+                            <Image src={camiseta} alt="" width={94} height={94} />
+                        </ImageContainer>
+
+                        <ProductInfos>
+                            <span>Camiseta Beyond the Limits</span>
+                            <strong>R$ 79,90</strong>
+
+                            <Link href="">Remover</Link>
+                        </ProductInfos>
+                    </Product>
+
+                    <Product>
+                        <ImageContainer>
+                            <Image src={camiseta} alt="" width={94} height={94} />
                         </ImageContainer>
 
                         <ProductInfos>
@@ -37,17 +64,21 @@ export function ShopBag({ isOpen = false, onToggleShopBag }: ShopBagProps) {
                         </ProductInfos>
                     </Product>
                 </ProductsList>
+
+                <PurchaseSummaryContainer>
+                    <Quantity>
+                        <span>Quantidade</span>
+                        <span>3 itens</span>
+                    </Quantity>
+
+                    <Total>
+                        <strong>Valor total</strong>
+                        <strong>R$ 270,00</strong>
+                    </Total>
+
+                    <button>Finalizar compra</button>
+                </PurchaseSummaryContainer>
             </ShopBagContent>
-
-            <PurchaseSummaryContainer>
-                <span>Quantidade</span>
-                <strong>Valor total</strong>
-
-                <span>3 itens</span>
-                <strong>R$ 270,00</strong>
-
-                <button>Finalizar compra</button>
-            </PurchaseSummaryContainer>
         </ShopBagContainer>
     )
 }
