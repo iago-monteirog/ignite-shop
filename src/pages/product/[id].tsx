@@ -5,6 +5,8 @@ import Stripe from "stripe";
 import Image from "next/image";
 import Head from "next/head";
 import { useShoppingCart } from "use-shopping-cart";
+import { useContext } from "react";
+import { ShopBagContext } from "../../contexts/ShopBagContext";
 
 interface ProductProps {
     product: {
@@ -21,11 +23,18 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
     const { addItem } = useShoppingCart();
+    const { toggleShopBag } = useContext(ShopBagContext);
 
     const formattedPrice = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     }).format(product.price / 100);
+
+    function handleAddToShoppingCart() {
+        addItem(product);
+
+        toggleShopBag();
+    }
 
     return (
         <>
@@ -42,7 +51,7 @@ export default function Product({ product }: ProductProps) {
                     <span>{formattedPrice}</span>
 
                     <p>{product.description}</p>
-                    <button onClick={() => addItem(product)}>
+                    <button onClick={handleAddToShoppingCart}>
                         Colocar na sacola
                     </button>
                 </ProductDetails>

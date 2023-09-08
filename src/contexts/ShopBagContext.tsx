@@ -14,8 +14,7 @@ interface ShopBagProviderProps {
 export function ShopBagProvider({ children }: ShopBagProviderProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    function toggleShopBag() {
-        console.log(isOpen);
+    const toggleShopBag = () => {
         setIsOpen(!isOpen);
     }
 
