@@ -11,18 +11,21 @@ export function Header() {
     const { toggleShopBag } = useContext(ShopBagContext);
     const { cartCount } = useShoppingCart();
 
+    const isEmptyCart = cartCount === 0;
+
     return (
         <HeaderContainer>
             <Link href='/'>
                 <Image src={logoImg} alt="" />
             </Link>
 
-            <HandbagBox onClick={toggleShopBag}>
+            <HandbagBox disabled={isEmptyCart} onClick={toggleShopBag}>
                 <Handbag size={24} weight='bold' color='#8D8D99' />
-
-                <ItemQuantityIndicator>
-                    <span>{cartCount}</span>
-                </ItemQuantityIndicator>
+                {!isEmptyCart && (
+                    <ItemQuantityIndicator>
+                        <span>{cartCount}</span>
+                    </ItemQuantityIndicator>
+                )}
             </HandbagBox>
         </HeaderContainer>
     );

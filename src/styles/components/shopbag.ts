@@ -6,11 +6,10 @@ export const ShopBagContainer = styled('main', {
     position: 'fixed',
     top: 0,
     right: 0,
-    height: '100vw', 
-    width: '33.33%', 
-    transform: 'translateX(100%)', 
-    transition: 'transform 0.3s ease-in-out', 
-    zIndex: 999, 
+    height: '100vw',
+    width: '33.33%',
+    transition: 'transform 0.3s ease-in-out',
+    zIndex: 999,
     padding: '24px 48px',
     display: 'flex',
     alignItems: 'stretch',
@@ -82,15 +81,6 @@ export const ProductInfos = styled('div', {
         lineHeight: 1.6,
         marginTop: 2
     },
-
-    a: {
-        fontSize: '1rem',
-        fontWeight: "bold",
-        textDecoration: 'none',
-        color: '$green500',
-        marginTop: 8
-    }
-
 });
 
 export const PurchaseSummaryContainer = styled('div', {
@@ -139,3 +129,17 @@ export const Total = styled('div', {
         fontSize: '$xl'
     }
 });
+
+export const RemoveItemButton = styled('button', {
+    fontSize: '1rem',
+    fontWeight: "bold",
+    textDecoration: 'none',
+    color: '$green500',
+    marginTop: 8,
+    background: 'none',
+    border: 0,
+    cursor: 'pointer',
+
+    display: 'flex',
+    alignItems: 'flex-start'
+})
