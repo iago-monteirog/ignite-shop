@@ -1,11 +1,10 @@
 import { X } from "@phosphor-icons/react";
 import { ImageContainer, Product, ProductInfos, ProductsList, PurchaseSummaryContainer, Quantity, RemoveItemButton, ShopBagContainer, ShopBagContent, ShopBagHeader, Total } from "../../styles/components/shopbag";
-import Link from "next/link";
 import Image from "next/image";
-import camiseta from '../../assets/1.png';
 import { useShoppingCart } from "use-shopping-cart";
 import { useContext, useEffect, useState } from "react";
 import { ShopBagContext } from "../../contexts/ShopBagContext";
+import axios from "axios";
 
 interface CartProps {
     id: string,
@@ -20,10 +19,12 @@ export function ShopBag() {
     const { cartCount, cartDetails, totalPrice, removeItem } = useShoppingCart();
     const { isOpen, toggleShopBag } = useContext(ShopBagContext);
     const [productsToBuy, setProductsToBuy] = useState<CartProps[]>([]);
+    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+
 
     useEffect(() => {
         const formatedCartDetails = Object.keys(cartDetails).map((productId) => ({
-            id: productId,
+            id: cartDetails[productId].id,
             imageUrl: cartDetails[productId].imageUrl,
             formattedPrice: cartDetails[productId].formattedPrice,
             name: cartDetails[productId].name,
@@ -52,9 +53,27 @@ export function ShopBag() {
         currency: 'BRL',
     }).format(totalPrice / 100);
 
-    function handleBuyProducts() {
-        console.log(productsToBuy);
-        console.log(cartDetails)
+    async function handleBuyProducts() {
+        try {
+            setIsCreatingCheckoutSession(true);
+
+            const payload = productsToBuy.map((product) => ({
+                priceId: product.id,
+                quantity: product.quantity
+            }));
+
+            const response = await axios.post('/api/checkout', {
+                payload,
+            });
+
+            console.log(response.data);
+
+            setIsCreatingCheckoutSession(false)
+
+        } catch (error) {
+            setIsCreatingCheckoutSession(false);
+            alert('Falha ao redirecionar ao checkout!')
+        }
     }
 
     function handleRemoveItem(id: string) {
@@ -102,7 +121,12 @@ export function ShopBag() {
                         <strong>{formattedTotalPrice}</strong>
                     </Total>
 
-                    <button onClick={handleBuyProducts}>Finalizar compra</button>
+                    <button
+                        disabled={isCreatingCheckoutSession}
+                        onClick={handleBuyProducts}
+                    >
+                        Finalizar compra
+                    </button>
                 </PurchaseSummaryContainer>
             </ShopBagContent>
         </ShopBagContainer>
