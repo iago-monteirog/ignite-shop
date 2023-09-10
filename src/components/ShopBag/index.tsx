@@ -18,7 +18,8 @@ interface CartProps {
 
 export function ShopBag() {
     const { cartCount, cartDetails, totalPrice, removeItem, clearCart } = useShoppingCart();
-    const { isOpen, toggleShopBag } = useContext(ShopBagContext);
+    const { isOpen, toggleShopBag, setIsOpen } = useContext(ShopBagContext);
+
     const [productsToBuy, setProductsToBuy] = useState<CartProps[]>([]);
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
 
@@ -42,7 +43,7 @@ export function ShopBag() {
 
     useEffect(() => {
         if (cartCount === 0) {
-            onToggleShopBag();
+            setIsOpen(false);
         }
     }, [cartCount])
 

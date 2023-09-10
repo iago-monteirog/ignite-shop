@@ -7,6 +7,7 @@ interface PriceIdProps {
 
 interface ShopBagContext {
     isOpen: boolean,
+    setIsOpen: (isOpen: boolean) => void,
     toggleShopBag: () => void,
 }
 
@@ -19,7 +20,6 @@ interface ShopBagProviderProps {
 
 export function ShopBagProvider({ children }: ShopBagProviderProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [priceIdList, setPriceIdList] = useState<PriceIdProps[]>([]);
 
     const toggleShopBag = () => {
         setIsOpen(!isOpen);
@@ -29,6 +29,7 @@ export function ShopBagProvider({ children }: ShopBagProviderProps) {
         <ShopBagContext.Provider
             value={{
                 isOpen,
+                setIsOpen,
                 toggleShopBag,
             }}
         >
