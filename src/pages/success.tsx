@@ -64,7 +64,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         expand: ['line_items', 'line_items.data.price.product']
     });
 
-    console.log(session.line_items.data[0].price.product)
     const customerName = session.customer_details.name;
     const productData = session.line_items.data.map((item) => {
         const product = item.price.product as Stripe.Product;
