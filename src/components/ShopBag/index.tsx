@@ -12,11 +12,12 @@ interface CartProps {
     formattedPrice: string,
     name: string,
     value: string,
-    quantity: number
+    quantity: number,
+    priceId: string
 }
 
 export function ShopBag() {
-    const { cartCount, cartDetails, totalPrice, removeItem } = useShoppingCart();
+    const { cartCount, cartDetails, totalPrice, removeItem, clearCart } = useShoppingCart();
     const { isOpen, toggleShopBag } = useContext(ShopBagContext);
     const [productsToBuy, setProductsToBuy] = useState<CartProps[]>([]);
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
@@ -32,7 +33,8 @@ export function ShopBag() {
                 style: 'currency',
                 currency: 'BRL',
             }).format(cartDetails[productId].value / 100),
-            quantity: cartDetails[productId].quantity
+            quantity: cartDetails[productId].quantity,
+            priceId: cartDetails[productId].defaultPriceId
         }));
 
         setProductsToBuy(formatedCartDetails);
@@ -58,7 +60,7 @@ export function ShopBag() {
             setIsCreatingCheckoutSession(true);
 
             const payload = productsToBuy.map((product) => ({
-                priceId: product.id,
+                price: product.priceId,
                 quantity: product.quantity
             }));
 
@@ -66,9 +68,11 @@ export function ShopBag() {
                 payload,
             });
 
-            console.log(response.data);
+            const checkoutUrl = response.data.checkoutUrl;
 
-            setIsCreatingCheckoutSession(false)
+            clearCart();
+
+            window.location.href = checkoutUrl;
 
         } catch (error) {
             setIsCreatingCheckoutSession(false);

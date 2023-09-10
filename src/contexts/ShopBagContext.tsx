@@ -1,9 +1,15 @@
 import { ReactNode, createContext, useState } from "react";
 
+interface PriceIdProps {
+    id: string,
+    priceId: string
+}
+
 interface ShopBagContext {
     isOpen: boolean,
-    toggleShopBag: () => void
+    toggleShopBag: () => void,
 }
+
 
 export const ShopBagContext = createContext({} as ShopBagContext);
 
@@ -13,6 +19,7 @@ interface ShopBagProviderProps {
 
 export function ShopBagProvider({ children }: ShopBagProviderProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [priceIdList, setPriceIdList] = useState<PriceIdProps[]>([]);
 
     const toggleShopBag = () => {
         setIsOpen(!isOpen);
@@ -22,7 +29,7 @@ export function ShopBagProvider({ children }: ShopBagProviderProps) {
         <ShopBagContext.Provider
             value={{
                 isOpen,
-                toggleShopBag
+                toggleShopBag,
             }}
         >
             {children}
