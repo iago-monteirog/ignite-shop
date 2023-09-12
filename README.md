@@ -55,9 +55,10 @@ Antes de começar, certifique-se de que você tenha o seguinte instalado:
     # ou
    yarn install
 
-4. Configure sua Stripe API Key no arquivo .env.local:
+4. Configure suas Stripes API Key no arquivo .env.local:
    ```bash
    NEXT_PUBLIC_STRIPE_API_KEY=your_stripe_api_key_here
+   NEXT_SECRET_STRIPE_API_KEY=your_stripe_api_key_here
 
 5. Inicie o apliticativo:
    ```bash
